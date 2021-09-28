@@ -30,20 +30,4 @@ if [ ! -f "/var/lib/gvm/.firstsync" ]; then
 	rm -r /tmp/data
 fi
 
-echo "Updating NVTs..."
-#su -c "rsync --compress-level=9 --links --times --omit-dir-times --recursive --partial --quiet rsync://feed.community.greenbone.net:/nvt-feed /var/lib/openvas/plugins" gvm
-su -c "greenbone-nvt-sync" gvm
-sleep 5
-
-echo "Updating GVMd data..."
-su -c "greenbone-feed-sync --type GVMD_DATA" gvm
-sleep 5
-
-echo "Updating SCAP data..."
-su -c "greenbone-feed-sync --type SCAP" gvm
-sleep 5
-
-echo "Updating CERT data..."
-su -c "greenbone-feed-sync --type CERT" gvm
-
 true
